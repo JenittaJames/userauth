@@ -10,7 +10,7 @@ const nocache = require('nocache');
 
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 3001;
 
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(bodyparser.json())
@@ -60,5 +60,5 @@ app.use('/admin',adminRoutes)
 
 
 app.listen(port,()=>{
-    console.log(`Server Started at  :  http://localhost:5001`);
+    console.log(`Server Started at  :  http://localhost:3001`);
 })

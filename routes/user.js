@@ -5,7 +5,8 @@ const auth = require('../middleware/auth')
 
 
 
-router.get('/',auth.checkSession,userController.loadHome);
+router.get('/home',auth.checkSession,userController.loadHome);
+router.get('/',auth.isLogin,userController.loadLogin)
 router.get('/login',auth.isLogin,userController.loadLogin)
 router.post('/login',userController.login)
 router.get('/register',auth.isLogin,userController.loadRegister)

@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const userModel = require('../model/userModel')
+const flash=require('express-flash')
 
 
 const loadLogin = async (req,res)=>{
@@ -33,7 +34,7 @@ const login = async (req,res)=>{
 
         if(!admin){
             req.flash('error_msg','Admin is not found');
-            return res.redirect('admin/login')
+            return res.redirect('/admin/login')
         }
 
         const isMatch = await bcrypt.compare(password, admin.password)
@@ -63,18 +64,19 @@ const loadDashboard = async (req,res)=>{
 
     if(req.session.admin){
         try {
+            const message=req.flash('message')
             const admin = await userModel.findOne({isAdmin: true});
             console.log('admin:',admin);
             console.log('req.session.admin:',req.session.admin);
 
             if(!admin){
-                res.flash('error_msg','Admin is not found. Please try again')
+                req.flash('error_msg','Admin is not found. Please try again')
                 return res.redirect('/admin/login');
             }
 
-            const users = await userModel.find({});
+            const users = await userModel.find({isAdmin:false});
 
-            return res.render('admin/dashboard',{users});
+            return res.render('admin/dashboard',{users,message});
 
         } catch (error) {
             console.log(error);
@@ -94,7 +96,7 @@ const editUser = async (req,res)=>{
         const hashedPassword = await bcrypt.hash(password,10)
 
         const user = await userModel.findOneAndUpdate({_id:id},{$set:{email,password:hashedPassword}})
-
+        req.flash("message","Editted successfully")
         res.redirect('/admin/dashboard')
 
     } catch (error) {
@@ -108,6 +110,7 @@ const deleteUser = async (req,res)=>{
 
         const {id} = req.params
         const user = await userModel.findByIdAndDelete({_id:id})
+        req.flash("message","Deleted successfully")
         res.redirect('/admin/dashboard')
 
     } catch (error) {
@@ -120,8 +123,14 @@ const deleteUser = async (req,res)=>{
 
 const addUser = async (req,res) =>{
     try {
-
         const {email,password} = req.body
+         const user = await userModel.findOne({email})
+        
+                if(user) {
+                    req.flash('message',"User already registered")
+                    return res.redirect('/admin/dashboard')
+                }
+
         const hashedPassword = await bcrypt.hash(password,10)
 
         const newUser = new userModel({
@@ -130,6 +139,7 @@ const addUser = async (req,res) =>{
         })
 
         await newUser.save()
+        req.flash("message","User Added")
         res.redirect('/admin/dashboard')
 
     } catch (error) {

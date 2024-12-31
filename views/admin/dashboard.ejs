@@ -17,6 +17,9 @@
     <!-- Main Content -->
     <main class="dashboard-container">
         <h2>User Management</h2>
+        <% if (message) { %>
+         <div style="color: rgb(255, 47, 47);"><%= message %></div>
+        <% } %>
         <div class="table-controls">
             <input type="text" id="searchUserInput" placeholder="Search by email" onkeyup="searchUser()">
             <button class="add-user-btn" onclick="openAddUserModal()">Add User</button>

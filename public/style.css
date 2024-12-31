@@ -32,7 +32,7 @@ main {
   display: grid;
   grid-template-columns: 45% 55%;
   place-items: center;
-  background: linear-gradient(to right,pink,pink,rgb(7, 165, 185)
+  background: linear-gradient(to right,rgb(13, 171, 192),rgb(11, 87, 187),rgb(7, 165, 185)
   );
   width: min(700px, 95%);
   border-radius: 20px;
@@ -43,7 +43,7 @@ main {
 .left-side {
   height: 100%;
   width: 100%;
-  background-image: url(successful-business-woman-cartoon-character-vector-37050708.jpg);
+  background-image:url(3071357.jpg) ;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -79,7 +79,7 @@ main {
   padding: 8px 6px;
   border: 2px solid #6b7280;
   border-radius: 5px;
-  background-color: #9ae7e7;
+  background-color: #ffffff;
   transform: scale(1);
   cursor: pointer;
   transition: transform 0.1s ease, background-color 0.5s, color 0.5s;
@@ -144,7 +144,7 @@ input {
   border: 2px solid #ccc;
   outline: 0;
   border-radius: 5px;
-  background-color: transparent;
+  background-color: white;
   margin: 4px 0 18px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -165,6 +165,7 @@ input:-webkit-autofill:active {
 }
 
 label {
+  color: white;
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -179,7 +180,7 @@ label {
   margin: 12px 0 24px;
   border: 2px solid #6b7280;
   border-radius: 5px;
-  background-color: #9ae7e7;
+  background-color: #ffffff;
   cursor: pointer;
   transition: all 0.5s;
 }
@@ -213,5 +214,5 @@ a {
 }
 
 a:hover {
-  color: rgb(13, 133, 185);
+  color: rgb(255, 255, 255);
 }

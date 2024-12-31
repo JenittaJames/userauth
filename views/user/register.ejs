@@ -58,7 +58,6 @@
         type="text"
         placeholder="Enter Email"
         name="email"
-        required
       />
 
       <label for="password">Password</label>
@@ -79,7 +78,7 @@
       <button type="submit" class="login-btn">Sign in</button>
       <div class="links">
         <a href="#">Forgot password?</a>
-        <a href="#">Do not have an account?</a>
+        <a href="/login">Already have an account?</a>
       </div>
     </form>
   </div>
@@ -140,11 +139,11 @@
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
 
-    if (email == "" || password == "" || confirmPassword == "") {
-      swal("All fields are required");
+    if (email === "" || password === "" || confirmPassword === "") {
+      swal.fire("All fields are required","","error");
       return false;
     } else if (password != confirmPassword) {
-      swal("Passwords do not match");
+      swal.fire("Passwords do not match","","error");
       return false;
     }
     // If validation passes, submit the form manually

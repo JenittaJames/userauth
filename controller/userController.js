@@ -34,11 +34,11 @@ const registerUser = async (req,res)=>{
                 email,
                 password: hashedPassword
             })
-
+// req.session.user=newUser
 
         await newUser.save()
         req.flash('success_msg','Registered Successfully');
-        return res.redirect('/');
+        return res.redirect('/login');
 
 
     } catch (error) {
@@ -74,9 +74,10 @@ const login = async (req,res)=>{
         }
 
         req.session.user = true
+        req.session.email=email
         req.flash("success_msg","Login successfully")
 
-        return res.redirect('/')
+        return res.redirect('/home')
         
     } catch (error) {
 
@@ -90,6 +91,7 @@ const login = async (req,res)=>{
 const loadRegister = (req,res)=>{
 
     try {
+        console.log(req.flash());
         res.render('user/register')
     } catch (error) {
         console.log(error.message);   
@@ -109,7 +111,8 @@ const loadLogin = (req,res)=>{
 
 const loadHome = (req,res)=>{
    try {
-    res.render('user/userHome')
+    console.log(req.session.email);
+    res.render('user/userHome',{user:req.session.email})
    } catch (error) {
     console.log(error.message); 
    }
